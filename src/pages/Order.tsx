@@ -6,6 +6,9 @@ import { calcTotalPrice } from "../utils/calcTotalPrice";
 import { calcTotalQuantity } from "../utils/calcTotalQuantity";
 import { useNavigate } from "react-router-dom";
 import { IOrder } from "../types/order/intex";
+import { useAppDispatch } from "../redux/store";
+import { setOrderStatus } from "../redux/opder/slice";
+import { clearItems } from "../redux/cart/slice";
 
 export default function Order() {
   const { items } = useAppSelector((state) => state.cart);
@@ -15,6 +18,7 @@ export default function Order() {
   const typesDelivery = ["Самовывоз", "Доставка"];
   const [time, setTime] = React.useState<string[]>([]);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [order, setOrder] = React.useState<IOrder>({
     id: Date.now(),
     name: "",
@@ -31,6 +35,7 @@ export default function Order() {
     time: "",
     comment: "",
   });
+
   function generateDeliveryTimeOptions() {
     const now = new Date();
     const deliveryTime = new Date(now.getTime() + 2 * 60 * 60 * 1000);
@@ -65,7 +70,11 @@ export default function Order() {
     setOrder({ ...order, order: items });
   }, []);
 
-  function submitOrder() {}
+  function submitOrder() {
+    dispatch(setOrderStatus());
+    dispatch(clearItems());
+    navigate("/cart/order/complete-order-page");
+  }
   return (
     <div className="orderPage">
       <div className="container">

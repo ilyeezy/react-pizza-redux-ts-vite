@@ -15,10 +15,7 @@ import { setCategoryId, setCurrentPage } from "../redux/filter/slice";
 import { fetchPizzas } from "../redux/pizza/asyncActions";
 
 const Home: React.FC = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const isMounted = React.useRef(false);
-
   const { items, status } = useSelector(selectPizzaData);
   const { categoryId, sort, currentPage, searchValue } =
     useSelector(selectFilter);
@@ -50,51 +47,9 @@ const Home: React.FC = () => {
     );
   };
 
-  // Если изменили параметры и был первый рендер
   React.useEffect(() => {
-    // if (isMounted.current) {
-    //   const params = {
-    //     categoryId: categoryId > 0 ? categoryId : null,
-    //     sortProperty: sort.sortProperty,
-    //     currentPage,
-    //   };
-
-    //   const queryString = qs.stringify(params, { skipNulls: true });
-
-    //   navigate(`/?${queryString}`);
-    // }
-
-    // const params = qs.parse(window.location.search.substring(1)) as unknown as SearchPizzaParams;
-    // const sortObj = sortList.find((obj) => obj.sortProperty === params.sortBy);
-    // dispatch(
-    //   setFilters({
-    //     searchValue: params.search,
-    //     categoryId: Number(params.category),
-    //     currentPage: Number(params.currentPage),
-    //     sort: sortObj || sortList[0],
-    //   }),
-    // );
-
     getPizzas();
-    // isMounted.current = true;
   }, [categoryId, sort.sortProperty, searchValue, currentPage]);
-
-  // Парсим параметры при первом рендере
-  // React.useEffect(() => {
-  //   if (window.location.search) {
-  //     const params = qs.parse(window.location.search.substring(1)) as unknown as SearchPizzaParams;
-  //     const sort = sortList.find((obj) => obj.sortProperty === params.sortBy);
-  //     dispatch(
-  //       setFilters({
-  //         searchValue: params.search,
-  //         categoryId: Number(params.category),
-  //         currentPage: Number(params.currentPage),
-  //         sort: sort || sortList[0],
-  //       }),
-  //     );
-  //   }
-  //   isMounted.current = true;
-  // }, []);
 
   const pizzas = items.map((obj, index) => (
     <PizzaBlock key={obj.id} {...obj} index={index} />

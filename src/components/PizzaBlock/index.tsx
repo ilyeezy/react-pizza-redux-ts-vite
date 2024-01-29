@@ -9,13 +9,13 @@ import { updateSize } from "../../utils/updateSize";
 import { Pizza } from "../../redux/pizza/types";
 
 type PizzaBlockProps = {
-  id: string;
+  id: string | number;
   title: string;
   Price: number;
   imgUrl: string;
   size: number[];
   type: string[];
-  rating: number;
+  rating?: number;
   index: number;
 };
 

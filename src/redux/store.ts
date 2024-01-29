@@ -4,6 +4,7 @@ import cart from "./cart/slice";
 import pizza from "./pizza/slice";
 import { useDispatch } from "react-redux";
 import pizzaById from "./PizzaDetails/slice";
+import orderSlice from "./opder/slice";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     cart,
     pizza,
     pizzaById,
+    orderSlice,
   },
 });
 
