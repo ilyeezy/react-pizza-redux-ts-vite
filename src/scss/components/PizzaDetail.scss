@@ -1,0 +1,39 @@
+.pizzaDetail {
+  min-height: 60vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  padding: 20px 0;
+  &__body {
+    display: flex;
+    align-items: flex-start;
+  }
+  &__img-block {
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin-top: 40px;
+  }
+
+  &__title {
+  }
+
+  &__description {
+    text-align: justify;
+  }
+
+  &__price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    p {
+      font-size: 24px;
+      font-weight: 600;
+    }
+  }
+}
